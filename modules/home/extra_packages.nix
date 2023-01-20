@@ -1,0 +1,22 @@
+{
+config,
+pkgs,
+...
+}:{
+  home.packages = with pkgs; [
+  	discord
+      	exa
+	kdenlive
+	neofetch
+	ark
+	mpv
+	emacs
+	alejandra
+	ripgrep
+	fd
+	coreutils
+	gnumake
+	zig
+        python3
+  ];
+}
