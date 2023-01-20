@@ -17,8 +17,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  hardware.bluetooth.enable = false;
+  services.blueman.enable = false;
 
   # Set environment variables
   environment.variables.EDITOR = "nvim";
@@ -31,7 +31,7 @@
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
   };
-  networking.hostName = "io"; # Define your hostname.
+  networking.hostName = "ultra"; # Define your hostname.
   # Pick only one of the below networking options.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.

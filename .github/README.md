@@ -19,7 +19,7 @@
 <a href="https://nixos.org">NixOS</a><br />
 <a href="https://awesomewm.org">AwesomeWM</a><br />
 <a href="https://github.com/pijulius/picom">Picom (Pijulius)</a><br />
-<a href="https://github.com/kovidgoyal/kitty">Kitty</a><br />
+<a href="https://wezfurlong.org">WezTerm</a><br />
 <a href="https://www.fishshell.com">Fish</a><br />
 <a href="https://neovim.io">Neovim</a><br />
 </table>
@@ -29,20 +29,11 @@
 
 ## :wrench: <samp>Installation</samp>
 
-1. Download ISO
-   ```sh
-   # Yoink nixos-unstable
-   wget -O nixos.iso https://channels.nixos.org/nixos-unstable/latest-nixos-minimal-x86_64-linux.iso
+1. Boot into the installer.
 
-   # Write it to a flash drive
-   cp nixos.iso /dev/sdX
-   ```
+2. Switch to root user: `sudo -i`
 
-2. Boot into the installer.
-
-3. Switch to root user: `sudo -i`
-
-4. Partitioning
+3. Partitioning
     Setup Partitions
     ```bash
     512MiB - EFI Partition
@@ -55,26 +46,26 @@
     ```bash
     $ mkfs.fat -F 32 -L boot /dev/nvme0n1p1
     $ mkswap -L swap /dev/nvme0n1p2
-    $ mkfs.btrfs -L home /dev/nvme0n1p3
-    $ mkfs.btrfs -L root /dev/nvme0n1p4
+    $ mkfs.btrfs /dev/nvme0n1p3
+    $ mkfs.btrfs /dev/nvme0n1p4
     ```
 
     Mount partitions
     ```bash
     $ mkdir -p /mnt/boot
     $ mkdir -p /mnt/home
-    $ mount /dev/nvme0n1p1 /mnt/boot
+    $ mount /dev/nvme0n1p4 /mnt
     $ swapon /dev/nvme0n1p2
     $ mount /dev/nvme0n1p3 /mnt/home
-    $ mount /dev/nvme0n1p4 /mnt
+    $ mount /dev/nvme0n1p1 /mnt/boot
     ```
 
-5. Enable flakes
+4. Enable flakes
     ```bash
-    $ nix-shell -p nixFlakes
+    $ nix-shell -p git nixUnstable nixFlakes
     ```
 
-6. Install nixos from flake
+5. Install nixos from flake
     ```bash
     $ nixos-install --flake github:emxry/dotfiles#io
     ```

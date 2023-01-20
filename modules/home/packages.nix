@@ -5,7 +5,7 @@ config,
 }:{
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
-  	kitty
+  	wezterm
 	xfce.thunar
 	xfce.thunar-volman
 	fzf
